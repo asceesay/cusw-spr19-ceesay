@@ -1,65 +1,66 @@
 // this person class will represent people in our class
+
 class Person {
   
   String name;
   String year;
-  PVector screenLocation;
   
+  PVector screenLocation;
   boolean locked;
   
-  Person(String _name, String _year){
+  Person(String _name, String _year) {
     name = _name;
     year = _year;
     screenLocation = new PVector(width/2, height/2);
   }
   
     // Arrange my person some angle theta along a circle
-  void circleLocation(float theta) {
-    float radius = 0.35*height;
-    screenLocation.x = 0.8*width/2 + radius*sin(theta);
-    screenLocation.y = height/2 + radius*cos(theta);
+  void randomLocation () {
+    screenLocation = new PVector(random(width), random(height));
   }
   
-  void randomLocation() {
-  float x = random(0.8*width);
-    float y = random(height);
-    screenLocation = new PVector(x, y);
-  }
+  //  float radius = 0.35*height;
+  //  screenLocation.x = 0.8*width/2 + radius*sin(theta);
+  //  screenLocation.y = height/2 + radius*cos(theta);
+  //}
+  
+  //void randomLocation() {
+  //float x = random(0.8*width);
+  //  float y = random(height);
+  //  screenLocation = new PVector(x, y);
+  //}
   
   //see if any mouse cursor is -near- my person
   boolean hoverEvent() {
+    
     float xDistance = abs(mouseX - screenLocation.x);
     float yDistance = abs(mouseX - screenLocation.y);
     
-    if (xDistance <-15 && yDistance <=15) {
+    if (xDistance <=15 && yDistance <=15) {
       return true;
     } else {
       return false;
     }
-
     
   }
-  
+  //is my peron selected by the mouse
   boolean checkSelection() {
-    if (hoverEvent() ){
+    if (hoverEvent()) {
       locked = true;
     } else {
       locked = false;
     }
     
     return locked;
-    
   }
   
+  // Update location of person if "locked on" with mouse
   void update() {
-    // Update location of person if "locked on" with mouse
     if (locked) {
       screenLocation = new PVector(mouseX, mouseY);
     }
- 
-  
 }
-  void drawPerson(){
+  void drawPerson() {
     noStroke(); // no circle outline
     
     if (hoverEvent()) {
