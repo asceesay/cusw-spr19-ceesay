@@ -11,6 +11,13 @@ class Balloon {
     yspeed = random(0.5, 1.0);
   }
   
+  Balloon(float tempD, int mX, int mY) {
+    x = mX;
+    y = mY;
+    diameter = tempD;
+    yspeed = random(0.5, 1.0);
+  }
+  
   void ascend() {
    y = y - yspeed;
    x = x + random(-2, 2);
